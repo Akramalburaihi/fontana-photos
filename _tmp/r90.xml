@@ -1,0 +1,117 @@
+<style>/*RULE90*/
+#rule90 .s9-intro{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:14px 0 18px;line-height:1.9}
+#rule90 .s9-case{margin-top:10px;background:#fdfbf8;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+#rule90 .s9-case h4{margin:0 0 6px;font-size:1rem;display:flex;align-items:center;gap:8px}
+#rule90 .s9-case ul{margin:0;padding-inline-start:18px;font-size:14px;color:#5a4b45;line-height:1.8}
+#rule90 ol.kvn{list-style:none;counter-reset:n;padding:0;margin:10px 0;display:grid;gap:8px}
+#rule90 ol.kvn li{counter-increment:n;background:#fdfbf8;border:1px solid var(--line);border-radius:12px;padding:10px 14px 10px 14px;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+#rule90 ol.kvn li::before{content:counter(n);width:30px;height:30px;border-radius:50%;background:var(--beige);color:var(--dark);font-weight:800;display:flex;align-items:center;justify-content:center}
+#rule90 ol.kvn li b{display:block;color:var(--dark)}#rule90 ol.kvn li span{font-size:14px;color:#5a4b45}
+#rule90 .s9-tip{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+#rule90 .s9-tip .btn{margin:0}
+#rule90 .s9-tip .btn.btn-ghost{color:var(--dark)}
+/* popup */
+#s9pop{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(30,20,18,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#s9pop.on{display:flex}
+#s9pop .s9-box{position:relative;width:min(860px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#FAFAF9;border:1px solid var(--line);border-radius:22px;padding:22px 22px 18px;direction:rtl;scrollbar-width:thin;scrollbar-color:#C99A63 transparent}
+#s9pop .s9-box::-webkit-scrollbar{width:6px}#s9pop .s9-box::-webkit-scrollbar-track{background:transparent}#s9pop .s9-box::-webkit-scrollbar-thumb{background:#C99A63;border-radius:6px}
+#s9pop .s9-hd{display:flex;align-items:center;gap:12px;margin-bottom:6px;padding-inline-end:48px}
+#s9pop .s9-hd h3{margin:0;font-size:1.25rem}#s9pop .s9-hd p{margin:2px 0 0;color:var(--muted);font-size:14px}
+#s9pop .s9-x{position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dark)}
+#s9pop .s9-x svg{width:20px;height:20px}
+.s9-f{display:grid;gap:6px}.s9-f label{font-size:13px;font-weight:700;color:var(--dark)}
+.s9-f input[type=date]{width:100%;box-sizing:border-box;height:46px;font:inherit;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--dark);direction:ltr;text-align:right}
+.s9-chk{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.s9-chk small{display:block;color:var(--muted);margin-top:6px;font-size:12.5px}
+.s9-trips-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 8px}
+.s9-trips-h h4{margin:0;font-size:1rem}
+.s9-add{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--dark);font:inherit;font-weight:700;cursor:pointer}
+.s9-add svg,.s9-del svg{width:18px;height:18px}
+.s9-trip{display:grid;grid-template-columns:1fr 1fr 46px;gap:10px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:8px}
+.s9-del{height:46px;width:46px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#b4463a;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.s9-go{width:100%;height:52px;margin-top:10px;border:0;border-radius:14px;background:#C99A63;color:#fff;font:inherit;font-weight:800;font-size:1.05rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.s9-go svg{width:22px;height:22px}.s9-go .isvg,.s9-add .isvg,.s9-del .isvg,.s9-x .isvg{display:inline-flex;width:auto;height:auto;background:transparent!important;border:0!important;box-shadow:none!important;color:inherit!important;margin:0}.s9-go .isvg{color:#fff!important}
+.s9-err{display:none;margin-top:10px;background:#fdecea;border:1px solid #f1b9b2;color:#8a2e24;border-radius:12px;padding:10px 14px;font-size:14px}
+.s9-res{display:none;margin-top:16px;border-radius:18px;padding:16px;border:1px solid var(--line)}
+.s9-res.ok{background:#eef7f0;border-color:#bfe0c7}.s9-res.full{background:#fff8e6;border-color:#f1d9a0}.s9-res.over{background:#fdecea;border-color:#f1b9b2}
+.s9-res h4{margin:0 0 12px;font-size:1.1rem;display:flex;align-items:center;gap:8px}.s9-res h4 svg{width:22px;height:22px}
+.s9-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.s9-kpi{background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center}
+.s9-kpi small{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+.s9-kpi b{display:block;font-size:1.7rem;line-height:1.2;color:var(--dark)}
+.s9-kpi b.d{font-size:1.05rem;padding-top:6px}
+.s9-kpi i{display:block;font-style:normal;color:var(--muted);font-size:11.5px;margin-top:2px}
+.s9-desc{margin-top:12px;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.8}
+.s9-foot{margin-top:12px;font-size:12.5px;color:var(--muted);text-align:center}.s9-foot.s9-copy{margin-top:6px;color:#C99A63;font-weight:700}
+@media(max-width:760px){.s9-trip{grid-template-columns:1fr 1fr;padding:10px}.s9-trip .s9-del{grid-column:1/-1;width:100%}.s9-kpis{grid-template-columns:1fr}#s9pop{padding:10px}#s9pop .s9-box{padding:18px 14px 14px;border-radius:18px}}
+
+/* تكييف مع تصميم صفحة الفيزا في البريهي */
+#rule90{--line:#E2E2DE;--beige:#F3ECE0;--dark:#3a2622;--muted:#64748b}
+#s9pop{--line:#E2E2DE;--beige:#F3ECE0;--dark:#3a2622;--muted:#64748b;z-index:2147480000}
+#rule90 .s9-intro{max-width:980px;margin:6px auto 22px;color:#3f3733;text-align:center}
+#rule90 .r90-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1180px;margin:0 auto}
+#rule90 .r90-card{height:auto}
+#rule90 .s9-case h4{color:#3a2622}
+#rule90 .s9-tip{justify-content:center}
+#rule90 .vsg-btn svg{width:20px;height:20px}
+#s9pop .s9-hd .vsg-ic{flex:none}
+#s9pop .s9-hd .vsg-ic svg,#s9pop .s9-x svg{width:20px;height:20px}
+#s9pop .s9-hd h3{color:#2b2420;font-family:Cairo,sans-serif}
+#s9pop .s9-box{color:#2b2420}
+#s9pop .s9-trips-h h4,#s9pop .s9-res h4{color:#2b2420}
+@media(max-width:900px){#rule90 .r90-grid{grid-template-columns:1fr}}
+</style><section class="vsg-sec alt" id="rule90"><div class="vsg-in"><div class="vsg-head c"><div class="vsg-kick">قاعدة <bdi dir="ltr">90</bdi> / <bdi dir="ltr">180</bdi> يومًا</div><h2 class="vsg-h2 albCairo" id="sec-11">ماذا يحدث بعد انتهاء فترة الـ <bdi dir="ltr">180</bdi> يومًا؟</h2></div><div class="s9-intro">عند انتهاء فترات الـ <bdi dir="ltr">180</bdi> يومًا، <b>لا توجد عملية «إعادة ضبط» مفاجئة</b> تصبح فيها الأيام الـ <bdi dir="ltr">90</bdi> متاحة دفعة واحدة من جديد، بل تعتمد التأشيرة على نظام يُسمّى <b>«النافذة المتحركة»</b> التي تمتد <bdi dir="ltr">180</bdi> يومًا إلى الخلف.</div><div class="r90-grid">
+<article class="vsg-card r90-card"><div class="vsg-ctop"><span class="vsg-ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path><path d="M3.5 10a9 9 0 0 1 2-4M20.5 14a9 9 0 0 1-2 4"></path></svg></span><div><span class="vsg-tag">آلية الحساب</span><h3 class="vsg-h3">كيف تعمل قاعدة الـ <bdi dir="ltr">180</bdi> يومًا المقابلة لـ <bdi dir="ltr">90</bdi> يومًا؟</h3></div></div>
+<p class="vsg-intro">آلية الحساب لا تعتمد على السنة التقويمية (من يناير إلى ديسمبر)، بل تُحسب <b>للوراء</b> ابتداءً من يوم الدخول أو التواجد الحالي.</p>
+<ul class="vsg-items"><li><span class="vsg-chk"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span><div><b>في كل يوم</b><span>تتواجد فيه داخل منطقة الشنغن (أو تخطط لدخوله)، قم بالعدّ <bdi dir="ltr">180</bdi> يومًا إلى الخلف.</span></div></li><li><span class="vsg-chk"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span><div><b>الحد الأقصى</b><span>يجب ألا يزيد مجموع الأيام التي قضيتها داخل الشنغن خلال تلك الفترة عن <bdi dir="ltr">90</bdi> يومًا.</span></div></li></ul></article>
+<article class="vsg-card r90-card"><div class="vsg-ctop"><span class="vsg-ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M7 3h10M7 21h10M8 3v4l4 5 4-5V3M8 21v-4l4-5 4 5v4"></path></svg></span><div><span class="vsg-tag">بعد أول سفرة</span><h3 class="vsg-h3">ماذا يحدث بعد انقضاء <bdi dir="ltr">180</bdi> يومًا من بداية أول سفرة؟</h3></div></div>
+<p class="vsg-intro">تعتمد الإجابة على طريقة استخدامك للأيام خلال تلك الفترة:</p>
+<div class="s9-case"><h4>الحالة الأولى: استهلكت الـ <bdi dir="ltr">90</bdi> يومًا دفعة واحدة (إقامة متواصلة)</h4><ul><li>يجب عليك <b>الانتظار خارج منطقة الشنغن لمدة <bdi dir="ltr">90</bdi> يومًا متواصلة</b>.</li><li>بعد انقضاء الـ <bdi dir="ltr">90</bdi> يومًا كاملة في الخارج، تصبح الأيام القديمة خارج النافذة المتحركة، وبالتالي يمكنك <b>الدخول مجددًا لمدة <bdi dir="ltr">90</bdi> يومًا جديدة</b> (بشرط أن تكون التأشيرة سارية ومتعددة الدخول).</li></ul></div>
+<div class="s9-case"><h4>الحالة الثانية: استخدمت الأيام على فترات متقطعة</h4><ul><li>إذا كنت تسافر وتعود (مثلًا: <bdi dir="ltr">20</bdi> يومًا ثم خروج، ثم <bdi dir="ltr">30</bdi> يومًا… وهكذا) تبدأ الأيام القديمة في <b>السقوط يومًا بيوم</b>.</li><li>كل يوم يمر وأنت خارج الشنغن ويسقط من حساب النافذة (لأنه أصبح أقدم من <bdi dir="ltr">180</bdi> يومًا) <b>يكسبك يومًا جديدًا</b> يمكنك استخدامه للدخول مجددًا.</li></ul></div></article>
+<article class="vsg-card r90-card"><div class="vsg-ctop"><span class="vsg-ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"></path><circle cx="12" cy="10" r="2.2"></circle></svg></span><div><span class="vsg-tag">قبل السفر مجددًا</span><h3 class="vsg-h3">الشروط الأساسية لإعادة استخدام التأشيرة</h3></div></div>
+<p class="vsg-intro">لكي تتمكن من السفر مجددًا بعد استعادة أيامك:</p>
+<ol class="kvn"><li><div><b>صلاحية التأشيرة</b><span>يجب أن تكون التأشيرة نفسها ما زالت سارية التاريخ (مثلًا تأشيرة لمدة سنة أو سنتين أو <bdi dir="ltr">5</bdi> سنوات).</span></div></li><li><div><b>عدد مرات الدخول</b><span>يجب أن تكون التأشيرة <b>متعددة الدخول</b>. إذا كانت محددة بدخول واحد أو دخولين، تنتهي فور استخدام عدد المرات المسموح بها حتى لو لم تستهلك <bdi dir="ltr">90</bdi> يومًا.</span></div></li><li><div><b>التأشيرة قصيرة المدى (الفئة «ج»)</b><span>هذه القواعد تنطبق على تأشيرات الإقامة القصيرة. إذا كنت بحاجة للإقامة أكثر من <bdi dir="ltr">90</bdi> يومًا متواصلة، يجب التقديم على <b>تأشيرة إقامة طويلة (الفئة «د»)</b> أو إقامة من الدولة المعنية.</span></div></li></ol></article>
+<article class="vsg-card r90-card"><div class="vsg-ctop"><span class="vsg-ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"></path></svg></span><div><span class="vsg-tag">نصيحة</span><h3 class="vsg-h3">نصيحة للحساب الدقيق</h3></div></div>
+<p class="vsg-intro">لتجنّب أي احتساب خاطئ يسبب تجاوز مدة الإقامة وما يترتب عليه من غرامات أو حظر سفر، استخدم حاسبة أيام الشنغن: أدخل تواريخ دخولك وخروجك السابقة لتعرف بدقة كم يومًا متبقيًا لك ومتى يحق لك الدخول مجددًا.</p>
+<div class="s9-tip"><button class="vsg-btn p" id="schengen-calc" onclick="s9Open()" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"></path></svg>حاسبة أيام فيزا الشنغن</button></div>
+<p style="margin-top:10px;font-size:13px"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4M12 8h.01"></path></svg>جميع الحسابات تستند إلى القواعد الرسمية للاتحاد الأوروبي لفترات الإقامة القصيرة في منطقة الشنغن.</p></article>
+</div></div></section><div aria-labelledby="s9t" aria-modal="true" class="s9pop" id="s9pop" role="dialog"><div class="s9-box">
+<button aria-label="إغلاق" class="s9-x" onclick="s9Close()" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+<div class="s9-hd"><div class="vsg-ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"></path></svg></div><div><h3 id="s9t">حاسبة أيام فيزا الشنغن</h3><p>أدخل تواريخ رحلاتك السابقة أو القادمة للتحقق من وضعك وفق قاعدة <bdi dir="ltr">90</bdi> / <bdi dir="ltr">180</bdi> يومًا</p></div></div>
+<div class="s9-chk"><div class="s9-f"><label for="s9date">تاريخ الفحص المستهدف (التاريخ المراد الحساب عنده)</label><input id="s9date" type="date"/></div><small>يفترض النظام تلقائيًا تاريخ اليوم إذا لم تقم بتغييره.</small></div>
+<div class="s9-trips-h"><h4>قائمة الرحلات في منطقة الشنغن</h4><button class="s9-add" onclick="s9Add()" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>إضافة رحلة</button></div>
+<div id="s9trips"></div>
+<button class="s9-go" onclick="s9Calc()" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="2" width="14" x="5" y="3"></rect><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"></path></svg>احسب الأيام المتاحة</button>
+<div class="s9-err" id="s9err"></div>
+<div class="s9-res" id="s9res"><h4 id="s9rt"></h4><div class="s9-kpis"><div class="s9-kpi"><small>الأيام المستهلكة (في آخر <bdi dir="ltr">180</bdi> يومًا)</small><b id="s9used">0</b><i>من أصل <bdi dir="ltr">90</bdi> يومًا</i></div><div class="s9-kpi"><small>الأيام المتبقية المتاحة</small><b id="s9rem">0</b><i>يومًا للإقامة</i></div><div class="s9-kpi"><small>تاريخ إمكانية الدخول لإقامة كاملة (<bdi dir="ltr">90</bdi> يومًا)</small><b class="d" id="s9reset">—</b><i>عند الانتظار خارج الشنغن</i></div></div><div class="s9-desc" id="s9desc"></div></div>
+<div class="s9-foot">جميع الحسابات تستند إلى القواعد الرسمية للاتحاد الأوروبي لحساب فترات الإقامة القصيرة في منطقة الشنغن.</div><div class="s9-foot s9-copy">المهندس أكرم البريهي</div>
+</div></div><script>/*RULE90*/
+(function(){
+var M=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+function fd(d){return d&amp;&amp;!isNaN(d)?'&lt;bdi dir="ltr"&gt;'+d.getDate()+'&lt;/bdi&gt; '+M[d.getMonth()]+' &lt;bdi dir="ltr"&gt;'+d.getFullYear()+'&lt;/bdi&gt;':'—'}
+function n(x){return '&lt;bdi dir="ltr"&gt;'+x+'&lt;/bdi&gt;'}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function pd(v){var p=v.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+var box=document.getElementById('s9pop'),trips=document.getElementById('s9trips'),k=0,inited=false;
+var IT='&lt;i class="isvg" aria-hidden="true"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/&gt;&lt;/svg&gt;&lt;/i&gt;';
+window.s9Add=function(){k++;var d=document.createElement('div');d.className='s9-trip';d.id='s9t'+k;d.innerHTML='&lt;div class="s9-f"&gt;&lt;label&gt;تاريخ الدخول&lt;/label&gt;&lt;input type="date" class="s9-in"&gt;&lt;/div&gt;&lt;div class="s9-f"&gt;&lt;label&gt;تاريخ الخروج&lt;/label&gt;&lt;input type="date" class="s9-out"&gt;&lt;/div&gt;&lt;button type="button" class="s9-del" title="حذف الرحلة" aria-label="حذف الرحلة" onclick="this.parentNode.remove()"&gt;'+IT+'&lt;/button&gt;';trips.appendChild(d)};
+window.s9Open=function(){if(!inited){inited=true;document.getElementById('s9date').value=iso(new Date());s9Add()}box.classList.add('on');document.documentElement.style.overflow='hidden'};
+window.s9Close=function(){box.classList.remove('on');document.documentElement.style.overflow=''};
+box.addEventListener('click',function(e){if(e.target===box)s9Close()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&amp;&amp;box.classList.contains('on'))s9Close()});function hashOpen(){if(location.hash==='#schengen-calc'){var t=document.getElementById('schengen-calc');if(t)t.scrollIntoView({block:'center'});setTimeout(s9Open,350)}}hashOpen();window.addEventListener('hashchange',hashOpen);
+function err(t){var e=document.getElementById('s9err');e.textContent=t;e.style.display=t?'block':'none'}
+var OK='&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;circle cx="12" cy="12" r="9"/&gt;&lt;path d="M8 12l3 3 5-6"/&gt;&lt;/svg&gt;',WARN='&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="M12 3 2 21h20z"/&gt;&lt;path d="M12 10v5M12 18h.01"/&gt;&lt;/svg&gt;',STOP='&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;circle cx="12" cy="12" r="9"/&gt;&lt;path d="M8 12h8"/&gt;&lt;/svg&gt;';
+window.s9Calc=function(){err('');var cv=document.getElementById('s9date').value;if(!cv){err('يرجى تحديد تاريخ الفحص المستهدف.');return}
+var c=pd(cv),ws=new Date(c);ws.setDate(ws.getDate()-179);
+var ins=trips.querySelectorAll('.s9-in'),outs=trips.querySelectorAll('.s9-out'),T=[];
+for(var i=0;i&lt;ins.length;i++){if(ins[i].value&amp;&amp;outs[i].value){var a=pd(ins[i].value),b=pd(outs[i].value);if(b&lt;a){err('تاريخ الخروج لا يمكن أن يكون قبل تاريخ الدخول في إحدى الرحلات.');return}T.push([a,b])}else if(ins[i].value||outs[i].value){err('يرجى إكمال تاريخي الدخول والخروج لكل رحلة.');return}}
+var used=0;for(var d=new Date(ws);d&lt;=c;d.setDate(d.getDate()+1)){for(var j=0;j&lt;T.length;j++){if(d&gt;=T[j][0]&amp;&amp;d&lt;=T[j][1]){used++;break}}}
+var rem=90-used,reset=null;if(T.length){var mx=new Date(Math.max.apply(null,T.map(function(t){return t[1].getTime()})));reset=new Date(mx);reset.setDate(reset.getDate()+90)}
+var R=document.getElementById('s9res');R.style.display='block';document.getElementById('s9used').innerHTML=n(used);document.getElementById('s9rem').innerHTML=n(Math.max(0,rem));document.getElementById('s9reset').innerHTML=reset?fd(reset):'يمكنك الدخول في أي وقت';
+var tt=document.getElementById('s9rt'),ds=document.getElementById('s9desc');
+if(used&gt;90){R.className='s9-res over';tt.innerHTML=WARN+'تحذير: تجاوز للمدة المسموح بها';ds.innerHTML='لقد تجاوزت الحد الأقصى للإقامة المسموح به ('+n(90)+' يومًا) بمقدار &lt;b&gt;'+n(used-90)+'&lt;/b&gt; يومًا خلال فترة الـ '+n(180)+' يومًا الممتدة من &lt;b&gt;'+fd(ws)+'&lt;/b&gt; إلى &lt;b&gt;'+fd(c)+'&lt;/b&gt;. هذا قد يعرّضك لغرامات أو حظر دخول.'}
+else if(rem===0){R.className='s9-res full';tt.innerHTML=STOP+'تم استهلاك جميع الأيام المتاحة ('+n('90/90')+')';ds.innerHTML='لقد استهلكت جميع الأيام المتاحة لك في منطقة الشنغن خلال النافذة المتحركة الحالية. يجب البقاء خارج دول الشنغن حتى تبدأ الأيام القديمة بالسقوط، أو الانتظار حتى تاريخ &lt;b&gt;'+(reset?fd(reset):'—')+'&lt;/b&gt; لإمكانية الدخول لقضاء إقامة كاملة.'}
+else{R.className='s9-res ok';tt.innerHTML=OK+'الوضع سليم ومتاح للسفر';ds.innerHTML='بناءً على الحسابات في تاريخ &lt;b&gt;'+fd(c)+'&lt;/b&gt; لديك &lt;b&gt;'+n(rem)+'&lt;/b&gt; يومًا متبقيًا للإقامة في منطقة الشنغن خلال النافذة المتحركة الممتدة من &lt;b&gt;'+fd(ws)+'&lt;/b&gt;.'}
+R.scrollIntoView({behavior:'smooth',block:'nearest'})};
+})();
+</script>
